@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import sqlite3
 import os
+import secrets
 import shutil
 from datetime import datetime
 
@@ -37,10 +38,12 @@ def on_startup():
     admin = conn.execute("SELECT id FROM users WHERE role = 'admin'").fetchone()
     if not admin:
         from security import hash_password
+        admin_user = os.getenv("ADMIN_USER", "admin")
+        admin_pass = os.getenv("ADMIN_PASS", secrets.token_hex(8))
         conn.execute("INSERT INTO users (username, password_hash, role, status) VALUES (?, ?, 'admin', 'approved')",
-                     ("admin", hash_password("admin123")))
+                     (admin_user, hash_password(admin_pass)))
         conn.commit()
-        print("Admin creado: admin / admin123")
+        print(f"Admin creado: {admin_user} / {admin_pass}")
     conn.close()
 
 DB_PATH = "database.db"

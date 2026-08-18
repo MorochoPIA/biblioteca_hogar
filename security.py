@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
+import os
+import secrets
 import jwt
 import bcrypt
 
-SECRET_KEY = "CLAVE_SECRETA_SUPER_SEGURA_Y_ALEATORIA_PARA_FIRMA"
+SECRET_KEY = os.getenv("SECRET_KEY", secrets.token_hex(32))
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_DAYS = 30
 
