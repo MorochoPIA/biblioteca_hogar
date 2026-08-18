@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>Lectura</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class'}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+<style>
+#pdf-render{display:block;margin:0 auto;max-width:100%}
+.tap-area{position:absolute;top:0;height:100%;width:30%;cursor:pointer;z-index:10}
+.tap-left{left:0}
+.tap-right{right:0}
+@media(max-width:768px){#pdf-render{width:100%!important;height:auto!important}}
+</style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-950 min-h-screen flex flex-col">
+  <div class="bg-white dark:bg-gray-900 border-b dark:border-gray-800 text-gray-900 dark:text-white px-4 py-3 flex justify-between items-center shadow-sm">
+    <button onclick="goBack()" class="text-blue-600 dark:text-blue-400 hover:underline text-sm font-medium">&larr; Catálogo</button>
+    <span id="page-indicator" class="text-sm text-gray-500 dark:text-gray-400">Página <span id="page-num">1</span> de <span id="page-count">0</span></span>
+    <button onclick="toggleDark()" class="text-xl hover:opacity-70" id="dark-toggle-r">🌙</button>
+  </div>
+  <div id="reader-container" class="flex-1 relative overflow-auto flex items-start justify-center p-2 bg-gray-50 dark:bg-gray-900">
+    <canvas id="pdf-render" class="shadow-xl"></canvas>
+    <div class="tap-area tap-left" onclick="prevPage()"></div>
+    <div class="tap-area tap-right" onclick="nextPage()"></div>
+  </div>
+  <div class="bg-white dark:bg-gray-900 border-t dark:border-gray-800 text-gray-900 dark:text-white px-4 py-3 flex justify-center gap-6 items-center">
+    <button onclick="prevPage()" class="bg-gray-200 dark:bg-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition text-sm font-medium">&larr; Anterior</button>
+    <button onclick="nextPage()" class="bg-blue-600 px-5 py-2 rounded-lg hover:bg-blue-700 transition text-sm font-medium text-white">Siguiente &rarr;</button>
+  </div>
+  <script src="js/reader.js"></script>
+</body>
+</html>

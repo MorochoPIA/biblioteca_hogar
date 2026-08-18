@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Base de datos (contiene datos personales)
+database.db
+
+# Archivos sensibles
+*.secret
+.env
+
+# Storage (archivos subidos por usuarios)
+storage/pdfs/*
+storage/covers/*
+!storage/pdfs/.gitkeep
+!storage/covers/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,14 @@
+[Unit]
+Description=Biblioteca Digital API
+After=network.target
+
+[Service]
+Type=simple
+User=buuu
+WorkingDirectory=/home/buuu/Documentos/Default Project/biblioteca_digital
+ExecStart=/usr/bin/python3 -m uvicorn main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
